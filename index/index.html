@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            border-radius: 10px;
+            list-style: none;
+        }
+
+
+        .viewPage {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .mainContent {
+            flex: 1;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 5px;
+
+        }
+
+        .mainAside {
+            width: 15%;
+            height: 100%;
+            background: #2fa1d6;
+            padding: 10px;
+        }
+
+        .mainArticle {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .mainArticleTitle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .mainNav {
+            background: #2fa1d6;
+            padding: 10px;
+        }
+
+        .mainNav ol {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mainCenter {
+            flex: 1;
+            background: violet;
+        }
+
+    </style>
+</head>
+<body>
+<div class="viewPage">
+    <main class="mainContent">
+        <aside class="mainAside">
+            <ul>
+                <li>铁甲小宝</li>
+                <li>果宝特攻</li>
+                <li>爆丸小子</li>
+                <li>落落历险记</li>
+            </ul>
+        </aside>
+        <article class="mainArticle">
+            <header class="mainArticleTitle">
+                <h1>
+                    动漫演示
+                </h1>
+            </header>
+            <nav class="mainNav">
+                <ol>
+                    <li>铁甲小宝</li>
+                    <li>果宝特攻</li>
+                    <li>爆丸小子</li>
+                    <li>落落历险记</li>
+                </ol>
+            </nav>
+            <main class="mainCenter">
+
+            </main>
+        </article>
+    </main>
+</div>
+</body>
+</html>
