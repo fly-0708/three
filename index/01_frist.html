@@ -1,30 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8"/>
     <title>Document</title>
-  </head>
-  <body>
-    <div>
-      sda
-    </div>
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "./build/three.module.js",
-          "three/addons/": "./examples/jsm/"
-        }
-
-
+</head>
+<body>
+<script type="importmap">
+    {
+      "imports": {
+        "three": "./build/three.module.js",
+        "three/addons/": "./examples/jsm/"
       }
-    </script>
-    <script type="module">
-      import * as THREE from "three";
-      import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-  
-      console.log(THREE.Scene);
-      console.log(OrbitControls);
-      
-    </script>
-  </body>
+
+
+    }
+</script>
+<script type="module">
+    import * as THREE from "three";
+
+
+    // 创建场景
+    const Scene = new THREE.Scene();
+    //添加物体
+    const geometry = new THREE.BoxGeometry(100, 100, 100);
+    //材质
+    const material = new THREE.MeshBasicMaterial({color: 454545});
+    //创建网格模型：表示生活中的物体
+    const mesh = new THREE.Mesh(geometry, material);
+    //设置网格模型的位置
+    mesh.position.set(0, 0, 0);
+    //将网格模型添加到场景中
+    Scene.add(mesh);
+    //添加辅助坐标系
+    const axesHelper = new THREE.AxesHelper(100);
+    Scene.add(axesHelper);
+
+    //生成的canvas画布单位是像素
+    const width = 800;
+    const height = 500;
+
+    /**
+     * 创建透视投影相机
+     * fov:垂直事业角度
+     * aspect:视窗宽高比
+     * near:近端面
+     * far:远端面
+     */
+    const camera = new THREE.PerspectiveCamera(35, width / height, 10, 4500);
+    //设置相机位置
+    //远近 上下  左右
+    camera.position.set(400, 400, 400);
+    //设置相机朝向/方向
+    // camera.lookAt(0,0,0);
+    camera.lookAt(mesh.position);
+
+    //渲染器
+    const renderer = new THREE.WebGLRenderer();
+    //设置渲染的尺寸大小
+    renderer.setSize(width, height);
+    //将webgl渲染的canvas内容添加到body
+    //渲染
+    renderer.render(Scene, camera);
+    //将渲染器添加到body
+    document.body.appendChild(renderer.domElement);
+</script>
+</body>
 </html>
