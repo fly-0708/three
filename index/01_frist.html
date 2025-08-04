@@ -15,6 +15,7 @@
 </script>
 <script type="module">
     import * as THREE from "three";
+    import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 
     // 创建场景
@@ -22,7 +23,11 @@
     //添加物体
     const geometry = new THREE.BoxGeometry(100, 100, 100);
     //材质
-    const material = new THREE.MeshBasicMaterial({color: 454545});
+    const material = new THREE.MeshLambertMaterial({
+        color: 454545,//颜色
+        transparent: true,//是否透明
+        opacity: 0.5,
+    });
     //创建网格模型：表示生活中的物体
     const mesh = new THREE.Mesh(geometry, material);
     //设置网格模型的位置
@@ -30,7 +35,11 @@
     //将网格模型添加到场景中
     Scene.add(mesh);
     //添加辅助坐标系
-    const axesHelper = new THREE.AxesHelper(100);
+    /**
+     * 尺寸
+     *rgb=>xyz
+     * */
+    const axesHelper = new THREE.AxesHelper(200);
     Scene.add(axesHelper);
 
     //生成的canvas画布单位是像素
@@ -51,7 +60,17 @@
     //设置相机朝向/方向
     // camera.lookAt(0,0,0);
     camera.lookAt(mesh.position);
-
+    //环境光
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    Scene.add(ambientLight);
+    //光源
+    const point =new THREE.PointLight(
+         0xffffff,
+         1,
+         0,
+    )
+    point.position.set(200, 100, 100);
+    Scene.add(point);
     //渲染器
     const renderer = new THREE.WebGLRenderer();
     //设置渲染的尺寸大小
@@ -61,6 +80,12 @@
     renderer.render(Scene, camera);
     //将渲染器添加到body
     document.body.appendChild(renderer.domElement);
+
+    //相机控件
+    const Controls =new OrbitControls(camera,renderer.domElement);
+    Controls.addEventListener("change", (e) => {
+        renderer.render(Scene, camera);
+    })
 </script>
 </body>
 </html>
